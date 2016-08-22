@@ -1,7 +1,7 @@
 <?php
 
 $high = 10;
-$width = 10 + 1;
+$width = 10;
 $landmine = 40; //炸彈數
 $landmineNumber = 0; //周圍炸彈數量預設0
 
@@ -70,13 +70,10 @@ for($i=0; $i<$high; $i++)  //設定數字
 
 		$landmineNumber = 0; //歸零
 
-		if ($arr[$i][$width-2]) {
-			$arr[$i][$width-1] = "N";
-		}
-		if ($arr[$high-1][$width-2]) {
-			$arr[$high-1][$width-1] = "";
-		}
+		echo $arr[$i][$j] ;
+	}
 
-		echo $arr[$i][$j];
+	if ($i != $high-1) {  //最後不給N
+		echo "N";
 	}
 }
