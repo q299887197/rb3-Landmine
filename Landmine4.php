@@ -72,11 +72,10 @@ for($i=0; $i<$high; $i++)  //設定數字
 
 		$landmineNumber = '0'; //歸零
 
-		echo $arr[$i][$j] . " ";
+		echo $arr[$i][$j];
 	}
 
 	if ($i != $high-1) {  //最後不給N
 		echo "N";
 	}
-	echo "<BR>";
 }
