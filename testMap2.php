@@ -152,3 +152,29 @@ $setLandmine = 40; //炸彈數
 	}
 
 // }
+
+?>
+
+<html>
+	<head>
+		<body>
+			<table border="1" align="center" cellpadding="5" cellspacing="0" bgcolor="#000000">
+				<tr>
+					<td width="30" align="center" bgcolor="#77FF00"><font color="#000000"></font></td>
+					<?php for($i = 0; $i < $setWidth; $i++){ ?>
+			        <td width="30" align="center" bgcolor="#77FF00"><font color="#000000"><?= $i ?></font></td>
+			        <?php } ?>
+				</tr>
+
+				<?php $j=0; foreach($removeN as $row) {   ?>
+				<tr>
+					<td align="center" bgcolor="#77FF00"><font color="#000000"><?= $j ?></font></td>
+					<?php for($i = 0; $i < $setWidth; $i++){ ?>
+					<td width="30" align="center" valign="baseline" bgcolor="#FFFFFF"><font color="#000000"><?= $row[$i] ?></font></td>
+					<?php } ?>
+				</tr>
+				<?php $j++; } ?>
+			</table>
+		</body>
+	</head>
+</html>
