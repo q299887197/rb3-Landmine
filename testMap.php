@@ -5,29 +5,30 @@ $setHigh = 10;
 $setWidth = 10;
 $setLandmine = 40; //炸彈數
 
-
 $getMap = $_GET['map'];
 
 $removeN = explode("N", $getMap); //拆 N
 $high = count($removeN); //抓 high
 
-$width = strpos($getMap,"N"); //抓 width
-
 $removeM = explode("M", $getMap); //抓 width
 $landmine = count($removeM) -1; //抓 炸彈數量
 
-
-$msg = examineMap($setHigh, $setWidth, $setLandmine, $high, $width, $landmine); //檢查長寬高炸彈
+$msg = examineMap($setHigh, $setWidth, $setLandmine, $high, $landmine, $removeN); //檢查長寬高炸彈
 $msg = examineM($high, $width, $removeN, $msg); //檢查數字
 
 /* 檢查長寬高炸彈 */
-function examineMap($setHigh, $setWidth, $setLandmine, $high, $width, $landmine)
+function examineMap($setHigh, $setWidth, $setLandmine, $high, $landmine, $removeN)
 {
 	$error = true;
 
-	if ($width != $setWidth) {
-		$error = false;
-		echo "錯誤!!寬限制" . $setWidth . ", 您的寬為:" . $width . "<br>";
+	for($i = 0; $i < $high; $i++)
+	{
+		$width = strlen($removeN[$i]); //抓取每行的寬度
+
+		if ($width != $setWidth) {
+			$error = false;
+			echo "錯誤!!寬限制" . $setWidth . ", 您第". $i ."行的寬為:" . $width . "<br>";
+		}
 	}
 	if ($high != $setHigh) {
 		$error = false;
@@ -90,10 +91,10 @@ function examineM($high, $width, $arr = array(), $error)
 	return $error;
 }
 
-for($i = 0; $i < $high; $i++)
-{
-	echo $removeN[$i] . "<br>";
-}
+// for($i = 0; $i < $high; $i++)
+// {
+// 	echo $removeN[$i] . "<br>";
+// }
 
 
 if ($msg == true) {
