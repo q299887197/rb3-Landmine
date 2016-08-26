@@ -8,6 +8,7 @@ $landmine = 40; //炸彈數
 
 $Rand = array();
 $arr = array();
+$arrOK = array();
 
 /* 印出隨機炸彈地圖 */
 function newTable($high, $width, $landmine)
@@ -78,7 +79,6 @@ function examineM($high, $width, $arr)
 			}
 
 			$landmineNumber = '0'; //歸零
-
 			echo $arr[$i][$j];
 		}
 
@@ -97,29 +97,62 @@ $arr = examineM($high, $width, $arr);
 $iTime2 = microtime(true);
 // echo $iTime1 - $iTime2 ;
 
-
+// echo "<script language='javascript'> alert('123'); </script>";
 ?>
 
 <html>
 	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta charset="utf-8">
+
+		<script type="text/javascript">
+
+		alert("123");
+
+			function myFunction(x,v)
+			{
+				// alert(v);
+				document.getElementById(x).style.backgroundColor = "#5599FF" ;
+				document.getElementById(x).value = v;
+
+				if (v == "M") {
+					alert('踩到地雷啦87');
+					document.getElementById(x).style.backgroundColor = "#FF0000" ;
+					document.getElementById(x).value = "87";
+				}
+			}
+
+		</script>
 		<body>
 			<table border="1" align="center" cellpadding="5" cellspacing="0" bgcolor="#000000">
 				<tr>
 					<td width="30" align="center" bgcolor="#77FF00"><font color="#000000"></font></td>
-					<?php for($i = 0; $i < $width; $i++){ ?>
+					<?php for($i = 1; $i <= $width; $i++){ ?>
 			        <td width="30" align="center" bgcolor="#77FF00"><font color="#000000"><?= $i ?></font></td>
 			        <?php } ?>
 				</tr>
 
-				<?php $j=0; foreach($arr as $row) {   ?>
+				<?php $j=1; foreach($arr as $row) {   ?>
 				<tr>
 					<td align="center" bgcolor="#77FF00"><font color="#000000"><?= $j ?></font></td>
 					<?php for($i = 1; $i <= $width; $i++){ ?>
-					<td width="30" align="center" valign="baseline" bgcolor="#FFFFFF"><font color="#000000"><?= $row[$i] ?></font></td>
-					<?php } ?>
+
+					<td align="center" valign="baseline" bgcolor="#FFFFFF">
+						<input type="button" id="<?= $j.$i ?>" value=" " onclick="myFunction(<?= $j.$i ?>, '<?= $row[$i] ?>')" style="width:50px; height:50px"/>
+					</td>
+
+					<!--<td width="30" align="center" valign="baseline" bgcolor="#FFFFFF"><font color="#000000"><?= $row[$i] ?></font></td>-->
+					<?php echo $j.$i."<br>"; } ?>
 				</tr>
+
+
+
 				<?php $j++; } ?>
 			</table>
+			<input type="button" name=""/>
 		</body>
+
+
+
 	</head>
 </html>
