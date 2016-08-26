@@ -102,14 +102,16 @@ $iTime2 = microtime(true);
 
 <html>
 	<head>
+		<title>踩地雷</title>
+		<h1 align="center">踩地雷</h1>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
         <meta charset="utf-8">
 
 		<script type="text/javascript">
 
-		alert("123");
+		// alert("123");
 
-			function myFunction(x,v)
+			function clickTable(x,v)
 			{
 				// alert(v);
 				document.getElementById(x).style.backgroundColor = "#5599FF" ;
@@ -120,6 +122,11 @@ $iTime2 = microtime(true);
 					document.getElementById(x).style.backgroundColor = "#FF0000" ;
 					document.getElementById(x).value = "87";
 				}
+			}
+
+			function resetTable()
+			{
+
 			}
 
 		</script>
@@ -138,18 +145,19 @@ $iTime2 = microtime(true);
 					<?php for($i = 1; $i <= $width; $i++){ ?>
 
 					<td align="center" valign="baseline" bgcolor="#FFFFFF">
-						<input type="button" id="<?= $j.$i ?>" value=" " onclick="myFunction(<?= $j.$i ?>, '<?= $row[$i] ?>')" style="width:50px; height:50px"/>
+						<input type="button" id="<?= $j.$i ?>" value=" " onclick="clickTable(<?= $j.$i ?>, '<?= $row[$i] ?>')" style="width:50px; height:50px"/>
 					</td>
 
 					<!--<td width="30" align="center" valign="baseline" bgcolor="#FFFFFF"><font color="#000000"><?= $row[$i] ?></font></td>-->
-					<?php echo $j.$i."<br>"; } ?>
+					<?php } ?>
 				</tr>
 
 
 
 				<?php $j++; } ?>
 			</table>
-			<input type="button" name=""/>
+			<br>
+			<center><input align="center" type="button" value="重玩" onclick="resetTable()" /></center>
 		</body>
 
 
