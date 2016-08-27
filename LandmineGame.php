@@ -97,7 +97,7 @@ $arr = examineM($high, $width, $arr);
 $iTime2 = microtime(true);
 // echo $iTime1 - $iTime2 ;
 
-// echo "<script language='javascript'> alert('123'); </script>";
+
 ?>
 
 <html>
@@ -108,20 +108,28 @@ $iTime2 = microtime(true);
         <meta charset="utf-8">
 
 		<script type="text/javascript">
-
+			var landmine = '<?= $landmine ?>'-1 ;
+			var tableNumber = '<?= $high*$width-$landmine ?>'-1 ;
 		// alert("123");
 
 			function clickTable(x,v)
 			{
-				// alert(v);
+				if (v != "M") {
 				document.getElementById(x).style.backgroundColor = "#5599FF" ;
 				document.getElementById(x).value = v;
+				document.getElementById("tableNumber").innerHTML = tableNumber-- ;
+
+				}
+
 
 				if (v == "M") {
-					alert('踩到地雷啦87');
+
 					document.getElementById(x).style.backgroundColor = "#FF0000" ;
 					document.getElementById(x).value = "87";
+					document.getElementById("landmine").innerHTML = landmine-- ;
+					// alert('踩到地雷啦87');
 				}
+
 			}
 
 			function resetTable()
@@ -139,13 +147,13 @@ $iTime2 = microtime(true);
 			        <?php } ?>
 				</tr>
 
-				<?php $j=1; foreach($arr as $row) {   ?>
+				<?php  for($j=1; $j <= $high; $j++) {   ?>
 				<tr>
 					<td align="center" bgcolor="#77FF00"><font color="#000000"><?= $j ?></font></td>
 					<?php for($i = 1; $i <= $width; $i++){ ?>
 
 					<td align="center" valign="baseline" bgcolor="#FFFFFF">
-						<input type="button" id="<?= $j.$i ?>" value=" " onclick="clickTable(<?= $j.$i ?>, '<?= $row[$i] ?>')" style="width:50px; height:50px"/>
+						<input type="button" id="<?= $j.$i ?>" value=" " onclick="clickTable(<?= $j.$i ?>, '<?= $arr[$j][$i] ?>')" style="width:50px; height:50px"/>
 					</td>
 
 					<!--<td width="30" align="center" valign="baseline" bgcolor="#FFFFFF"><font color="#000000"><?= $row[$i] ?></font></td>-->
@@ -154,13 +162,19 @@ $iTime2 = microtime(true);
 
 
 
-				<?php $j++; } ?>
+				<?php } ?>
 			</table>
 			<br>
 			<center><input align="center" type="button" value="重玩" onclick="resetTable()" /></center>
+			<br>
+			<div>炸彈剩餘數<p id="landmine"><?= $landmine ?></p></div>
+
+			<p id="tableNumber"><?= $high*$width-$landmine ?></p>
+			innerHTML
 		</body>
 
 
 
 	</head>
 </html>
+http://wp.mlab.tw/?p=375
