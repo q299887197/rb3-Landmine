@@ -79,11 +79,11 @@ function examineM($high, $width, $arr)
 			}
 
 			$landmineNumber = '0'; //歸零
-			echo $arr[$i][$j];
+			echo $arr[$i][$j] ;
 		}
 
 		if ($i != $high) {  //最後不給N
-			echo "N";
+			echo "N"."<br>";
 		}
 
 		// echo "<BR>";
@@ -96,9 +96,9 @@ $arr = examineM($high, $width, $arr);
 
 $iTime2 = microtime(true);
 // echo $iTime1 - $iTime2 ;
-$jsonArr = json_encode($arr); //傳JSON
+$jsonArr = json_encode($arr);
 echo "<br>".$jsonArr;
-// echo "<br>".$arr[1][1];
+
 ?>
 
 <html>
@@ -125,25 +125,24 @@ echo "<br>".$jsonArr;
 			var json = '<?= $jsonArr ?>';
 			var resultTest = JSON.parse(json);
 
-			function clickTable(x,w,z)
+			function clickTable(coordinate,x,y)
 			{
-				if (resultTest[w][z] != "M" && arr[w][z] != 1) {
-					arr[w][z] = 1;
-					document.getElementById(x).style.backgroundColor = "#5599FF" ;
-					document.getElementById(x).value = resultTest[w][z];
+				if (resultTest[x][y] != "M" && arr[x][y] != 1) { //一般格子
+					arr[x][y] = 1; //判斷點擊過
+					document.getElementById(coordinate).style.backgroundColor = "#5599FF" ;
+					document.getElementById(coordinate).value = resultTest[x][y];
 					document.getElementById("tableNumber").innerHTML = tableNumber-- ;
 					// alert(arr[w][z]);
 
 				}
 
-
-				if (resultTest[w][z] == "M" && arr[w][z] != 1) {
-					arr[w][z] = 1;
-					document.getElementById(x).style.backgroundColor = "#FF0000" ;
-					document.getElementById(x).value = "M";
+				if (resultTest[x][y] == "M" && arr[x][y] != 1) { //炸彈
+					arr[x][y] = 1; //判斷點擊過
+					document.getElementById(coordinate).style.backgroundColor = "#FF0000" ;
+					document.getElementById(coordinate).value = "M";
 					document.getElementById("landmine").innerHTML = landmine-- ;
 					// alert(arr[w][z]);
-					alert('踩到地雷啦87');
+					// alert('踩到地雷啦87');
 				}
 			}
 
