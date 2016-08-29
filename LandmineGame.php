@@ -106,9 +106,18 @@ echo "<br>".$jsonArr;
 		<title>踩地雷</title>
 		<h1 align="center">踩地雷</h1>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <meta charset="utf-8">
+		<meta charset="utf-8">
 
 		<script type="text/javascript">
+			var arr = new Array();
+			for(var i = 1; i <= <?= $high ?>; i++)
+			{
+				arr[i] = new Array();
+				for(var j = 1; j <= <?= $width ?>; j++)
+				{
+					arr[i][j];
+				}
+			}
 
 			var landmine = '<?= $landmine ?>'-1 ;
 			var tableNumber = '<?= $high*$width-$landmine ?>'-1 ;
@@ -118,18 +127,18 @@ echo "<br>".$jsonArr;
 
 			function clickTable(x,w,z)
 			{
-				// alert(resultTest[w][z]);
-
-				if (resultTest[w][z] != "M") {
-				document.getElementById(x).style.backgroundColor = "#5599FF" ;
-				document.getElementById(x).value = resultTest[w][z];
-				document.getElementById("tableNumber").innerHTML = tableNumber-- ;
-				alert(arr[w][z]);
+				if (resultTest[w][z] != "M" && arr[w][z] != 1) {
+					arr[w][z] = 1;
+					document.getElementById(x).style.backgroundColor = "#5599FF" ;
+					document.getElementById(x).value = resultTest[w][z];
+					document.getElementById("tableNumber").innerHTML = tableNumber-- ;
+					// alert(arr[w][z]);
 
 				}
 
 
-				if (resultTest[w][z] == "M") {
+				if (resultTest[w][z] == "M" && arr[w][z] != 1) {
+					arr[w][z] = 1;
 					document.getElementById(x).style.backgroundColor = "#FF0000" ;
 					document.getElementById(x).value = "M";
 					document.getElementById("landmine").innerHTML = landmine-- ;
