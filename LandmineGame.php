@@ -96,8 +96,9 @@ $arr = examineM($high, $width, $arr);
 
 $iTime2 = microtime(true);
 // echo $iTime1 - $iTime2 ;
-
-
+$jsonArr = json_encode($arr); //傳JSON
+echo "<br>".$jsonArr;
+// echo "<br>".$arr[1][1];
 ?>
 
 <html>
@@ -108,28 +109,33 @@ $iTime2 = microtime(true);
         <meta charset="utf-8">
 
 		<script type="text/javascript">
+
 			var landmine = '<?= $landmine ?>'-1 ;
 			var tableNumber = '<?= $high*$width-$landmine ?>'-1 ;
-		// alert("123");
 
-			function clickTable(x,v)
+			var json = '<?= $jsonArr ?>';
+			var resultTest = JSON.parse(json);
+
+			function clickTable(x,w,z)
 			{
-				if (v != "M") {
+				// alert(resultTest[w][z]);
+
+				if (resultTest[w][z] != "M") {
 				document.getElementById(x).style.backgroundColor = "#5599FF" ;
-				document.getElementById(x).value = v;
+				document.getElementById(x).value = resultTest[w][z];
 				document.getElementById("tableNumber").innerHTML = tableNumber-- ;
+				alert(arr[w][z]);
 
 				}
 
 
-				if (v == "M") {
-
+				if (resultTest[w][z] == "M") {
 					document.getElementById(x).style.backgroundColor = "#FF0000" ;
-					document.getElementById(x).value = "87";
+					document.getElementById(x).value = "M";
 					document.getElementById("landmine").innerHTML = landmine-- ;
-					// alert('踩到地雷啦87');
+					// alert(arr[w][z]);
+					alert('踩到地雷啦87');
 				}
-
 			}
 
 			function resetTable()
@@ -153,7 +159,8 @@ $iTime2 = microtime(true);
 					<?php for($i = 1; $i <= $width; $i++){ ?>
 
 					<td align="center" valign="baseline" bgcolor="#FFFFFF">
-						<input type="button" id="<?= $j.$i ?>" value=" " onclick="clickTable(<?= $j.$i ?>, '<?= $arr[$j][$i] ?>')" style="width:50px; height:50px"/>
+						<input type="button" id="<?= $j.$i ?>" value=" " onclick="clickTable('<?= $j.$i ?>', '<?= $j ?>', '<?= $i ?>')" style="width:50px; height:50px"/>
+						<!--<input type="button" id="<?= $j.$i ?>" value=" " onclick="getProfile(<?= $j.$i ?>,<?= $j ?>, <?= $i ?>)" style="width:50px; height:50px"/>-->
 					</td>
 
 					<!--<td width="30" align="center" valign="baseline" bgcolor="#FFFFFF"><font color="#000000"><?= $row[$i] ?></font></td>-->
